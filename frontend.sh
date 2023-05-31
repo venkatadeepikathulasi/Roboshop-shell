@@ -8,4 +8,4 @@ unzip /tmp/frontend.zip
 #some file need to be created
 
 systemctl restart nginx
-systemctl enable nginxs
+systemctl enable nginx
