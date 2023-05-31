@@ -1,5 +1,5 @@
 yum install nginx -y
-cp frontend.repo /etc/nginx/default.d/frontend.conf
+cp frontend.repo /etc/nginx/default.d/frontend.repo
 systemctl start nginx
 rm -rf /usr/share/nginx/html/*
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
