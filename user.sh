@@ -1,16 +1,27 @@
+echo -e "\e[32m ...setup...\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+echo -e "\e[32m ...install nodejs...\e[0m"
 yum install nodejs -y
+echo -e "\e[32m ...roboshop add...\e[0m"
 useradd roboshop
+echo -e "\e[32m ...make direcory...\e[0m"
+rm-rf /app
 mkdir /app
+echo -e "\e[32m ...creating file...\e[0m"
+
 curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip
+echo -e "\e[32m ...change directory...\e[0m"
+
 cd /app
+echo -e "\e[32m ...unzip...\e[0m"
 unzip /tmp/user.zip
-cd /app
+echo -e "\e[32m ...install npm..\e[0m"
 npm install
-cp user.service /etc/systemd/system/user.service
+
+cp /root/Roboshop-shell/user.service /etc/systemd/system/user.service
 systemctl daemon-reload
 systemctl enable user
 systemctl start user
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp /root/Roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 yum install mongodb-org-shell -y
 mongo --host mongodb.devops1008.online </app/schema/user.js
