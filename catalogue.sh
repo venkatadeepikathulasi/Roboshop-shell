@@ -16,7 +16,7 @@ unzip /tmp/catalogue.zip
 echo -e "\e[33m>>>>>> install nodejs repos >>>>>>\e[0m"
 npm install
 echo -e "\e[34m>>>>>> copy catalogue systemd service file>>>>>>\e[0m"
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp /root/Roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service
 echo -e "\e[35m>>>>>> Start catalogue service>>>>>>\e[0m"
 systemctl daemon-reload
 systemctl enable catalogue
