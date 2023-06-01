@@ -19,7 +19,7 @@ echo -e "\e[31m >>>>>>>>install >>>>>>>\e[0m"
 pip3.6 install -r requirements.txt
 echo -e "\e[31m >>>>>>>>copy systemd>>>>>>>\e[0m"
 
-cp /root/Robosho-shell/payment.service /etc/systemd/system/payment.service
+cp /root/Roboshop-shell/payment.service /etc/systemd/system/payment.service
 echo -e "\e[31m >>>>>>>>start service>>>>>>>\e[0m"
 
 systemctl enable payment
