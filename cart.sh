@@ -15,12 +15,12 @@ echo -e "\e[36m>>>>>> unzip the file>>>>>>\e[0m"
 unzip /tmp/cart.zip
 echo -e "\e[33m>>>>>> install nodejs repos >>>>>>\e[0m"
 npm install
-echo -e "\e[34m>>>>>> copy catalogue systemd service file>>>>>>\e[0m"
+echo -e "\e[34m>>>>>> copy cart systemd service file>>>>>>\e[0m"
 cp /root/Roboshop-shell/cart.service /etc/systemd/system/cart.service
-echo -e "\e[35m>>>>>> Start catalogue service>>>>>>\e[0m"
+echo -e "\e[35m>>>>>> Start cart service>>>>>>\e[0m"
 systemctl daemon-reload
-systemctl enable catalogue
-systemctl start catalogue
+systemctl enable cart
+systemctl start cart
 echo -e "\e[36m>>>>>copy mongodb repo>>>>>>>\e[0m"
 cp /root/Roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[31m>>>>install mongodb client>>>>>>\e[0m"
