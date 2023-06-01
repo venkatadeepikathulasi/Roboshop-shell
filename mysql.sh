@@ -5,8 +5,8 @@ echo -e "\e[31m >>>>>>>>repos file>>>>>>>\e[0m"
 cp /root/Roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo
 echo -e "\e[31m >>>>>>>>Start service>>>>>>>\e[0m"
 
-systemctl enable mysqld
-systemctl start mysqld
+systemctl enable mysql
+systemctl start mysql
 echo -e "\e[31m >>>>>>>>reset paswd>>>>>>>\e[0m"
 
 mysql_secure_installation --set-root-pass RoboShop@1
