@@ -1,4 +1,5 @@
-source common.sh
+script_path=$(dirname $0)
+source ${script_path}/common.sh
 echo -e "\e[31m >>>>>>>>configuration repos>>>>>>>\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 echo -e "\e[32m>>>>>>>> install nodejs>>>>>>>>>\e[0m"
@@ -17,7 +18,7 @@ unzip /tmp/cart.zip
 echo -e "\e[33m>>>>>> install nodejs repos >>>>>>\e[0m"
 npm install
 echo -e "\e[34m>>>>>> copy cart systemd service file>>>>>>\e[0m"
-cp /root/Roboshop-shell/cart.service /etc/systemd/system/cart.service
+cp $script_path/cart.service /etc/systemd/system/cart.service
 echo -e "\e[35m>>>>>> Start cart service>>>>>>\e[0m"
 systemctl daemon-reload
 systemctl enable cart

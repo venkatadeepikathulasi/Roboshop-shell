@@ -1,4 +1,5 @@
-source common.sh
+script_path=$(dirname $0)
+source ${script_path}/common.sh
 
 echo -e "\e[31m >>>>>>>>install python>>>>>>>\e[0m"
 
@@ -21,7 +22,7 @@ echo -e "\e[31m >>>>>>>>install >>>>>>>\e[0m"
 pip3.6 install -r requirements.txt
 echo -e "\e[31m >>>>>>>>copy systemd>>>>>>>\e[0m"
 
-cp /root/Roboshop-shell/payment.service /etc/systemd/system/payment.service
+cp $script_path/payment.service /etc/systemd/system/payment.service
 echo -e "\e[31m >>>>>>>>start service>>>>>>>\e[0m"
 
 systemctl enable payment

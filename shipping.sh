@@ -1,4 +1,5 @@
-source common.sh
+script_path=$(dirname $0)
+source ${script_path}/common.sh
 echo -e "\e[32m >>>>>>>>install maven>>>>>>>\e[0m"
 yum install maven -y
 echo -e "\e[32m >>>>>>>>adding roboshop>>>>>>>\e[0m"
@@ -19,7 +20,7 @@ echo -e "\e[32m >>>>>>>>install my sql>>>>>>>\e[0m"
 yum install mysql -y
 mysql -h mysql.devops1008.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
 echo -e "\e[32m >>>>>>>>setup the systemd service>>>>>>>\e[0m"
-cp /root/Roboshop-shell/shipping.service /etc/systemd/system/shipping.service
+cp $script_path/shipping.service /etc/systemd/system/shipping.service
 echo -e "\e[32m >>>>>>>>start the service>>>>>>>\e[0m"
 
 systemctl daemon-reload

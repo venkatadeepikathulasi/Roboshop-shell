@@ -1,9 +1,10 @@
-source common.sh
+script_path=$(dirname $0)
+source ${script_path}/common.sh
 echo -e "\e[31m >>>>>>>>disable mysql>>>>>>>\e[0m"
 dnf module disable mysql -y
 echo -e "\e[31m >>>>>>>>repos file>>>>>>>\e[0m"
 
-cp /root/Roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo
+cp $script_path/mysql.repo /etc/yum.repos.d/mysql.repo
 echo -e "\e[31m >>>>>>>>install service>>>>>>>\e[0m"
 
 yum install mysql-community-server -y
