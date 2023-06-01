@@ -8,8 +8,8 @@ echo -e "\e[31m >>>>>>>>install service>>>>>>>\e[0m"
 yum install mysql-community-server -y
 echo -e "\e[31m >>>>>>>>Start service>>>>>>>\e[0m"
 
-systemctl enable mysql
-systemctl start mysql
+systemctl enable mysqld
+systemctl start mysqld
 echo -e "\e[31m >>>>>>>>reset paswd>>>>>>>\e[0m"
 
 mysql_secure_installation --set-root-pass RoboShop@1
