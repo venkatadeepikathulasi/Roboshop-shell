@@ -17,7 +17,10 @@ mv target/shipping-1.0.jar shipping.jar
 echo -e "\e[32m >>>>>>>>install my sql>>>>>>>\e[0m"
 yum install mysql -y
 mysql -h mysql.devops1008.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+echo -e "\e[32m >>>>>>>>setup the systemd service>>>>>>>\e[0m"
+cp /root/Roboshop.shell/shipping.service /etc/systemd/system/shipping.serrvice
 echo -e "\e[32m >>>>>>>>start the service>>>>>>>\e[0m"
+
 systemctl daemon-reload
 systemctl enable shipping
 systemctl start shipping
