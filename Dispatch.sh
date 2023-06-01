@@ -1,3 +1,4 @@
+source common.sh
 yum install golang -y
 useradd roboshop
 mkdir /app

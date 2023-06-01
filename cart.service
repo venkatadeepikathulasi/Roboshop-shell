@@ -1,7 +1,7 @@
 [Unit]
 Description = Cart Service
 [Service]
-User=roboshop
+User={app_user}
 Environment=REDIS_HOST=redis.devops1008.online
 Environment=CATALOGUE_HOST=catalogue.devops1008.online
 Environment=CATALOGUE_PORT=8080

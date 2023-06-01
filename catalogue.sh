@@ -1,9 +1,10 @@
+source common.sh
 echo -e "\e[31m >>>>>>>>configuration repos>>>>>>>\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 echo -e "\e[32m>>>>>>>> install nodejs>>>>>>>>>\e[0m"
 yum install nodejs -y
 echo -e "\e[33m>>>>>>>>add application user >>>>>>>\e[0m"
-useradd roboshop
+useradd {app_user}
 echo -e "\e[34m>>>>>> making directory>>>>>>\e[0m"
 # before creating the app directory some od content we have to remove
 rm-rf /app

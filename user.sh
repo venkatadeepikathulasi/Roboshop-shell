@@ -1,3 +1,4 @@
+source common.sh
 echo -e "\e[32m ...setup...\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 echo -e "\e[32m ...install nodejs...\e[0m"

@@ -1,3 +1,4 @@
+source common.sh
 echo -e "\e[31m >>>>>>>>disable mysql>>>>>>>\e[0m"
 dnf module disable mysql -y
 echo -e "\e[31m >>>>>>>>repos file>>>>>>>\e[0m"
