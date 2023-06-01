@@ -3,6 +3,9 @@ dnf module disable mysql -y
 echo -e "\e[31m >>>>>>>>repos file>>>>>>>\e[0m"
 
 cp /root/Roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo
+echo -e "\e[31m >>>>>>>>install service>>>>>>>\e[0m"
+
+yum install mysql-community-server -y
 echo -e "\e[31m >>>>>>>>Start service>>>>>>>\e[0m"
 
 systemctl enable mysql
