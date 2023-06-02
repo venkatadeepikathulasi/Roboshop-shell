@@ -1,28 +1,9 @@
-script_path=$(dirname $0)
+script = $(realname "$0")
+script_path=$(dirname "$script")
 source ${script_path}/common.sh
-echo -e "\e[31m >>>>>>>>configuration repos>>>>>>>\e[0m"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-echo -e "\e[32m>>>>>>>> install nodejs>>>>>>>>>\e[0m"
-yum install nodejs -y
-echo -e "\e[33m>>>>>>>>add application user >>>>>>>\e[0m"
-useradd {app_user}
-echo -e "\e[34m>>>>>> making directory>>>>>>\e[0m"
-# before creating the app directory some od content we have to remove
-rm-rf /app
-mkdir /app
-echo -e "\e[35m>>>>>> download app content>>>>>>\e[0m"
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
-cd /app
-echo -e "\e[36m>>>>>> unzip the file>>>>>>\e[0m"
-unzip /tmp/catalogue.zip
-echo -e "\e[33m>>>>>> install nodejs repos >>>>>>\e[0m"
-npm install
-echo -e "\e[34m>>>>>> copy catalogue systemd service file>>>>>>\e[0m"
-cp /catalogue.service /etc/systemd/system/catalogue.service
-echo -e "\e[35m>>>>>> Start catalogue service>>>>>>\e[0m"
-systemctl daemon-reload
-systemctl enable catalogue
-systemctl start catalogue
+component = catalogue
+fun_nodejs
+
 echo -e "\e[36m>>>>>copy mongodb repo>>>>>>>\e[0m"
 cp $script_path/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[31m>>>>install mongodb client>>>>>>\e[0m"

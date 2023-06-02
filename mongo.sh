@@ -1,5 +1,7 @@
-script_path=$(dirname $0)
+script = $(realname "$0")
+script_path=$(dirname "$script")
 source ${script_path}/common.sh
+
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 yum install mongodb-org -y
 systemctl enable mongod

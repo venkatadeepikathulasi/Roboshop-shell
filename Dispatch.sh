@@ -1,5 +1,7 @@
-script_path=$(dirname $0)
+script = $(realname "$0")
+script_path=$(dirname "$script")
 source ${script_path}/common.sh
+
 yum install golang -y
 useradd roboshop
 mkdir /app

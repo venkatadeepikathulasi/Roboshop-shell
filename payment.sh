@@ -1,5 +1,7 @@
-script_path=$(dirname $0)
+script = $(realname "$0")
+script_path=$(dirname "$script")
 source ${script_path}/common.sh
+rabbitmq_appuser_password = $1
 
 echo -e "\e[31m >>>>>>>>install python>>>>>>>\e[0m"
 
@@ -21,6 +23,7 @@ echo -e "\e[31m >>>>>>>>install >>>>>>>\e[0m"
 
 pip3.6 install -r requirements.txt
 echo -e "\e[31m >>>>>>>>copy systemd>>>>>>>\e[0m"
+sed -i -e "s|rabbitmq_appuser_password|${rabbitmq_appuser_password}|"$(script_path)/payment.service
 
 cp $script_path/payment.service /etc/systemd/system/payment.service
 echo -e "\e[31m >>>>>>>>start service>>>>>>>\e[0m"
