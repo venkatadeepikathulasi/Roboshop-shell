@@ -3,6 +3,20 @@ print_head()
 {
   echo -e\e[32m>>>>>>>$*<<<<<<<<<<<\e[0m
 }
+schema_setup()
+{
+  if["$schema_setup"==mongo];then
+   print_head"copy mongodb repo"
+cp $script_path/mongo.repo /etc/yum.repos.d/mongo.repo
+print_head"install mongodb client"
+yum install mongodb-org-shell -y
+print_head "load schema"
+mongo --host mongodb.devops1008.online </app/schema/catalogue.js
+fi
+}
+
+
+
 func_nodejs()
 {
  print_head "configuration repos"
@@ -28,4 +42,7 @@ func_nodejs()
   systemctl daemon-reload
   systemctl enable ${component}
   systemctl start ${component}
+
+  schema_setup
 }
+
