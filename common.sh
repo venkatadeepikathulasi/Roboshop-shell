@@ -1,48 +1,78 @@
 app_user = roboshop
-print_head()
+func_print_head()
 {
   echo -e\e[32m>>>>>>>$*<<<<<<<<<<<\e[0m
 }
-schema_setup()
+func_schema_setup()
 {
   if["$schema_setup"==mongo];then
-   print_head"copy mongodb repo"
+   func_print_head"copy mongodb repo"
 cp $script_path/mongo.repo /etc/yum.repos.d/mongo.repo
-print_head"install mongodb client"
+func_print_head"install mongodb client"
 yum install mongodb-org-shell -y
-print_head "load schema"
+func_print_head "load schema"
 mongo --host mongodb.devops1008.online </app/schema/catalogue.js
 fi
+if"${schema_setup}" == mysql ]; then
+
+ func_print_head "install my sql"
+  yum install mysql -y
+  mysql -h mysql.devops1008.online -uroot -p${mysql_root_password} < /app/schema/shipping.sql
+  fi
+}
+func_app_prereq()
+{
+  func_print_head"making directory"
+    rm -rf /app
+    mkdir /app
+  func_print_head"Download app content"
+    curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
+    echo -e "\e[32m >>>>>>>>unzip the file>>>>>>>\e[0m"
+    cd /app
+    unzip /tmp/${component}.zip
+
 }
 
+func_systemd_Setup()
+{
+  func_print_head"setup the systemd service"
+    cp $script_path/${component}.service /etc/systemd/system/${component}.service
+   func_print_head"start the service"
+
+    systemctl daemon-reload
+    systemctl enable ${component}
+    systemctl start ${component}
+}
 
 
 func_nodejs()
 {
- print_head "configuration repos"
+ func_print_head "configuration repos"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-  print_head "install nodejs"
+  func_print_head "install nodejs"
   yum install nodejs -y
-  print_head "add application user"
-  useradd roboshop
-  print_head "making directory"
-  # before creating the app directory some od content we have to remove
-  rm-rf /app
-  mkdir /app
-  print_head "download app content"
-  curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/cart.zip
-  cd /app
- print_head "unzip the file"
-  unzip /tmp/${component}.zip
-  print_head "install nodejs repos"
+  func_app_prereq
+  func_print_head "install nodejs repos"
   npm install
-  print_head "copy cart systemd service file"
-  cp $script_path/${component}.service /etc/systemd/system/{component}.service
-  print_head "Start cart service"
-  systemctl daemon-reload
-  systemctl enable ${component}
-  systemctl start ${component}
+  func_print_head "copy cart systemd service file"
 
-  schema_setup
+  func_schema_setup
+  func_systemd_Setup
+}
+
+func_java()
+{
+  func_print_head "install maven"
+  yum install maven -y
+func_print_head"adding roboshop"
+  useradd {app_user}
+ func_app_prereq
+ func_print_head"download maven dependcies"
+   mvn clean package
+   mv target/${component}-1.0.jar ${component}.jar
+   func_schema_setup
+
+  func_systemd_Setup
+
 }
 
