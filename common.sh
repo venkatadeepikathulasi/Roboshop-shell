@@ -37,7 +37,7 @@ if"${schema_setup}" == mysql ]; then
 func_app_prereq()
 {
   func_print_head"adding roboshop"
-    useradd {app_user} &>/tmp/roboshop.log
+    useradd {app_user} &>>/tmp/roboshop.log
      func_checking_sucess $?
 
   func_print_head"making directory"
@@ -91,7 +91,7 @@ func_nodejs()
 func_java()
 {
   func_print_head "install maven"
-  yum install maven -y &>/tmp/roboshop.log
+  yum install maven -y &>>/tmp/roboshop.log
   func_checking_sucess $?
 
  func_app_prereq
