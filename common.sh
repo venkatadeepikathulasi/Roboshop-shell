@@ -3,6 +3,15 @@ func_print_head()
 {
   echo -e\e[32m>>>>>>>$*<<<<<<<<<<<\e[0m
 }
+func_checking_sucess
+{
+  if[$? -eq 0];then
+      echo func_print_head SUCESS
+      else
+        echo func_print_head Fail
+        echo"refer a log for more information"
+        exit 1
+}
 func_schema_setup()
 {
   if["$schema_setup"==mongo];then
@@ -28,7 +37,7 @@ if"${schema_setup}" == mysql ]; then
 func_app_prereq()
 {
   func_print_head"adding roboshop"
-    useradd {app_user}
+    useradd {app_user} &>/tmp/roboshop.log
      func_checking_sucess $?
 
   func_print_head"making directory"
@@ -59,14 +68,7 @@ func_systemd_Setup()
       func_checking_sucess $?
 }
 
-func_checking_sucess
-{
-  if[$? -eq 0];then
-      echo func_print_head SUCESS
-      else
-        echo func_print_head Fail
-        exit 1
-}
+
 
 
 func_nodejs()
@@ -89,7 +91,7 @@ func_nodejs()
 func_java()
 {
   func_print_head "install maven"
-  yum install maven -y
+  yum install maven -y &>/tmp/roboshop.log
   func_checking_sucess $?
 
  func_app_prereq
