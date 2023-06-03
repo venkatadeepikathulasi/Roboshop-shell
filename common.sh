@@ -1,11 +1,12 @@
 app_user = roboshop
+script = $(realpath "$0")
+script_path=$(dirname"$script")
 log_file = /tmp/roboshop.log
+#rm -rf $log_file
 func_print_head()
 {
   echo -e "\e[32m>>>>>>>$*<<<<<<<<<<<\e[0m"
    echo -e "\e[32m>>>>>>>$1<<<<<<<<<<<\e[0m"&>>$log_file
-
-
 }
 func_checking_sucess
 {
