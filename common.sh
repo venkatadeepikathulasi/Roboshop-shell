@@ -44,6 +44,14 @@ func_systemd_Setup()
     systemctl start ${component}
 }
 
+func_checking_sucess
+{
+  if[$? -eq 0];then
+      echo func_print_head SUCESS
+      else
+        echo func_print_head Fail
+}
+
 
 func_nodejs()
 {
@@ -64,11 +72,13 @@ func_java()
 {
   func_print_head "install maven"
   yum install maven -y
+  func_checking_sucess
 func_print_head"adding roboshop"
   useradd {app_user}
  func_app_prereq
  func_print_head"download maven dependcies"
    mvn clean package
+   func_checking_sucess
    mv target/${component}-1.0.jar ${component}.jar
    func_schema_setup
 
