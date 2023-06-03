@@ -42,8 +42,11 @@ if"${schema_setup}" == mysql ]; then
 func_app_prereq()
 {
   func_print_head"adding roboshop"
-    useradd {app_user} &>>$log_file
-     func_checking_sucess $?
+  id ${app_user} &>>/tmp/roboshop.conf
+  if[ $? -ne 0];then
+    useradd ${app_user} &>>/tmp/roboshop.log
+    fi
+       func_checking_sucess $?
 
   func_print_head"making directory"
     rm -rf /app &>>$log_file
@@ -109,4 +112,28 @@ func_java()
   func_systemd_Setup
 
 }
+
+func_python()
+{
+ func_print_head install python
+
+  yum install python36 gcc python3-devel -y &>>logfile
+  func_checking_sucess $?
+  func_app_prereq
+
+
+  func_print_head install
+
+  pip3.6 install -r requirements.txt &>>log_file
+  func_checking_sucess $?
+
+func_print_head update password in system files
+  sed -i -e "s|rabbitmq_appuser_password|${rabbitmq_appuser_password}|"$(script_path)/${component}.service &>>$log_file
+
+    func_checking_sucess $?
+  func_print_head start service
+
+  func_systemd_Setup
+
+}}
 
